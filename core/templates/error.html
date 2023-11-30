@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+</br>
+<div class="container d-flex justify-content-center align-items-center pt-5 mt-5">
+  <div class="text-center fw-bolder shadow p-3 mb-5 bg-body rounded" style="max-width: 420px;">
+    <h3>Oooops! Такого мастера еще нет...</h3></br></br>
+    <a href="{% url 'index' %}" class="btn btn-secondary">Пойдем на главную</a>
+  </div>
+</div>
+{% endblock %}

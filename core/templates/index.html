@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+    <!-- Page content-->
+    <p>
+    </br>
+  </br>
+  </br>
+</br>
+  <h3 align="center">Найти лучшего мастера</h3>
+    <div class="text-center">
+      <a href="{% url 'cities' %}" "button" class="btn btn-primary">ВЫБРАТЬ ГОРОД</a>
+    </div> 
+  </br>
+    <div class="text-center">
+      <a href="/cities/44/" "button" class="btn btn-primary">ONLINE УСЛУГИ</a>
+    </div>
+    </br>
+    </br>
+  </br>
+</br>
+</br>
+<!--About Accordeon-->
+<section class="container">
+  <div class="col-md-10 mx-md-auto mx-3 mt-sm-0 mt-5 py-sm-5 py-4 px-0 rounded-3 bg-light shadow-sm" style="transform: translateY(-100px);">
+    <div class="col-md-10 mx-md-auto mx-3 py-lg-4 px-0">
+      <h2 class="h3 mb-4 pb-lg-2 text-center">О нашем портале</h2>
+      <div class="accordion" id="accordionFAQ">
+  
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="heading-2">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-2" aria-expanded="false" aria-controls="collapse-2">Реклама на портале</button>
+          </h2>
+          <div class="accordion-collapse collapse" aria-labelledby="heading-2" data-bs-parent="#accordionFAQ" id="collapse-2" style="">
+            <div class="accordion-body">В верхнем правом углу сайта кнопка «разместить», нажав на неё вы переходите в телеграмм-бот и отвечаете на его вопросы поочередно. 
+            </br>
+            Поле телефон пропускать нельзя, это единственная обратная связь вашей анкеты с клиентом.
+            </br>
+            Инстаграм мы берем только для продвижения в социальных сетях.
+            </br>
+            Фото мастера обязательно, по статистике клиент выбирает мастера, который ему внешне близок.
+            </br>
+            Фото работ - чем больше вы добавите, тем лучше, клиент увидит ваше портфолио и сможет принять решение.
+            </br>
+            Есть профессии где достаточно и одного фото (психолог, репетитор и тд), но если вы фотограф, мастер маникюра, парикмахер или делаете тортики на заказ или рисуете картины, без фото работ, как клиент вас сможет оценить?
+            </br>
+            Отнеситесь к заполнению анкеты максимально серьезно, мы помогаем вас найти, но продаете себя вы сами. </div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="heading-2">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-2" aria-expanded="false" aria-controls="collapse-2">Кого здесь можно найти?</button>
+          </h2>
+          <div class="accordion-collapse collapse" aria-labelledby="heading-2" data-bs-parent="#accordionFAQ" id="collapse-2" style="">
+            <div class="accordion-body">Наш портал помогает найти специалистов в различных областях, стоит выбрать город и категорию услуг, далее вы увидите всех представленных в нем специалистов. </div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="heading-3">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-3" aria-expanded="false" aria-controls="collapse-3">Чем мы лучше других?</button>
+          </h2>
+          <div class="accordion-collapse collapse" aria-labelledby="heading-3" data-bs-parent="#accordionFAQ" id="collapse-3" style="">
+            <div class="accordion-body">Мы постарались сделать наиболее удобный и простой в использовании поисковик по услугам в Израиле, который отвечает всем современным требованиям по использованию с любого устройства. </div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="heading-4">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-4" aria-expanded="false" aria-controls="collapse-4">Помогите нам стать лучше!</button>
+          </h2>
+          <div class="accordion-collapse collapse" aria-labelledby="heading-4" data-bs-parent="#accordionFAQ" id="collapse-4" style="">
+            <div class="accordion-body">Если вы заметили на портале какую-либо неточность, ошибку или опечатку, пожалуйста, дайте нам знать об этом. Так же вы можете отправить нам на почту любые ваши пожелания связанные с функционалом и наполнением портала, которые будут рассмотрены в обязательном порядке. </div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="heading-5">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-5" aria-expanded="false" aria-controls="collapse-5">Кто мы?</button>
+          </h2>
+          <div class="accordion-collapse collapse" aria-labelledby="heading-5" data-bs-parent="#accordionFAQ" id="collapse-5" style="">
+            <div class="accordion-body">Мы молодая команда репатриантов, которые в свое время столкнулись с трудностями адаптации и поиска необходимых услуг в Израиле, поэтому мы решили создать этот портал для удобства всех русскоязычных пользователей. </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+ 
+    
+    {% endblock %}

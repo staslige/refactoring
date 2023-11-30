@@ -1,0 +1,120 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+  <section style="max-width:555px;" class="container pt-5 mt-5">
+    <div class="card mb-4 shadow-lg">
+      <div class="card-body">
+        <div class="d-flex align-items-start align-items-center mb-3 pb-2 border-bottom">
+          <img class="rounded-3 shadow-sm" src="{{ master.photo.url }}" alt="{{ master.service_name }} {{ master.name }} {{ master.city }}" width="140">
+          <div class="ps-2 ms-1">
+            <h1 class="h6 mb-2 ml-3">{{ master.name }}<br>{{ master.service_name }}</h1>
+             <p><i class="bi bi-geo-alt"></i>&nbsp;{{ master.city }}</p>
+             <p> {{ master.address }} </p>
+             <p><i class="bi bi-wallet2"></i>&nbsp;от {{ master.pricemin|default_if_none:"" }} - {{ master.pricemax|default_if_none:"" }} &#8362;</p>     
+        </div>
+        </div>
+
+        <div class="mb-3 pb-3 border-bottom">
+          {{ master.about|linebreaks }}
+        </div>
+
+        <style>
+            /* Custom CSS for contact buttons */
+            .contact-button {
+              background-color: #25d366;
+              border-color: #25d366;
+          }
+          </style>
+    
+        <div class="mb-3 pb-3 border-bottom">
+          <div class="col">
+            <a class="btn btn-secondary btn-lg rounded-pill w-sm-auto w-100 shadow-lg p-3 mb-3 rounded" href="tel:{{ master.phone }}">
+              Позвонить мастеру &nbsp;&nbsp;&nbsp;&nbsp;<i class="bi bi-telephone-inbound"></i>
+            </a>
+          </div>
+          <div class="col">
+            <a class="btn contact-button btn-lg rounded-pill w-sm-auto w-100 shadow-lg p-3 mb-2 rounded" href="https://wa.me/{{ master.whatsapp }}">
+              Написать в WhatsApp &nbsp;<i class="bi bi-whatsapp"></i>
+            </a>
+          </div>
+        </div>
+
+        <style>
+            .thumbnail {
+              width: 100px;
+              height: 100px;
+              object-fit: cover;
+            }     
+          </style>
+
+<div class="container gallery-container border-bottom"> 
+  <h5 class="page-description text-center">Фотогалерея мастера {{ master.name }}</h5>         
+  <div class="tz-gallery">       
+    <div class="row row-cols-4 row-cols-sm-4 row-cols-md-4 row-cols-lg-4 g-2">
+  {% for image in images %}
+  <div class="col">
+    <a class="lightbox" href="{{ image }}">
+      <img class="thumbnail rounded-3 shadow" src="{{ image }}" alt="{{ master.name }} {{ master.city }} {{ master.service }}">
+    </a>
+  </div>
+  {% endfor %}
+</div>    
+       </div>
+      </br>
+      </div>
+    </br>
+
+    <section>
+      <div class="container reviews-container"> 
+        <h4 class="page-description text-center">Отзывы мастера {{ master.name }}</h4>
+        <div class="text-center">
+          <p>Средняя оценка: {{ master.average_rating|floatformat:"-1" }} на основании ({{ master.reviews.count }} отзывов)</p>          <div class="mt-4">
+            {% for review in master.reviews.all %}
+            <div class="card mb-3 shadow-sm">
+              <div class="card-body py-2">
+                  <p class="fw-bolder">Отзыв от {{ review.author }}, оценка: {{ review.rating }}</p>
+                  <p><em>{{ review.content }}</em></p>
+                  <p><small>{{ review.created_at }}</small></p>
+              </div>
+          </div>
+            {% endfor %}
+          </div>
+        </div> 
+          <h4> Оставьте ваш отзыв</h4>               
+        <form method="post" action="" class="mb-4">
+          {% csrf_token %}
+          <div class="mb-3">
+            <label for="id_author" class="form-label">Ваше имя</label>
+            <input type="text" class="form-control shadow-sm" id="id_author" name="author" placeholder="Введите ваше имя"required>
+          </div>
+          <div class="mb-3">
+            <label for="id_email" class="form-label">Ваш Email</label>
+            <input type="email" class="form-control shadow-sm" id="id_email" name="email" placeholder="Введите ваш Email" required>
+        </div>
+          <div class="mb-3">
+            <label for="id_content" class="form-label">Ваш отзыв</label>
+            <textarea class="form-control shadow-sm" id="id_content" name="content" rows="3" placeholder="Введите текст вашего отзыва о мастере {{ master.name }}" required></textarea>
+          </div>
+          <div class="mb-3">
+            <label for="id_rating" class="form-label">Оцените мастера по 5 бальной шкале</label>
+            <select class="form-select shadow-sm" id="id_rating" name="rating" required>
+                <option value="5">5 звезд (отлично)</option>
+                <option value="4">4 звезды (хорошо)</option>
+                <option value="3">3 звезды (нормально)</option>
+                <option value="2">2 звезды (плохо)</option>
+                <option value="1">1 звезда (очень плохо)</option>
+            </select>
+        </div>
+        <div class="text-center">
+          <button type="submit" class="btn btn-primary shadow">Отправить отзыв</button>
+      </div>
+        </form>  
+          </div>
+            </section>
+
+     </div>
+    </div>
+  </section>
+{% endblock %}

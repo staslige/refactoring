@@ -1,0 +1,19 @@
+<!-- service.html -->
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+</br>
+<div style="max-width:555px;" class="container justify justify-content-center pt-5 mt-5">
+    <h3 align="center">Выбор услуг {{ city.name }}</h3>
+    <br>
+    <div class="list-group text-center fw-bolder shadow p-2 mb-1 bg-body rounded">
+        {% for service in services %}
+            <a href="{% url 'masters_for_service' city.id category.id service.id %}" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                {{ service.name }}
+                <span class="badge bg-primary rounded-pill">{{ service.masters_count }}</span> {# исправить, чтоб отображалось количество мастеров в услуге! #}
+            </a>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

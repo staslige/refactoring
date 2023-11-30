@@ -1,0 +1,210 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+</br>
+    <title>Регистрация мастера</title>
+
+    <div class="container pt-5 mt-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-6">
+                <h3 class="text-center">Регистрация мастера</h3>
+                <form method="post" enctype="multipart/form-data" id="registration-form" autocomplete="new-password">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email:</label>
+                        <input type="email" class="form-control" id="email" name="email" placeholder="Введите ваш Email" autocomplete="off" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Password:</label>
+                        <input type="password" class="form-control" id="password" name="password" placeholder="Придумайте пароль, который запомните" autocomplete="off" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Имя (или название салона, фирмы):</label>
+                        <input type="text" class="form-control" id="name" name="name" placeholder="Введите ваше Имя и желательно Фамилию" maxlength="20" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="city" class="form-label">1. Город или Online (если нет в списке, ближайший):</label>
+                        <select id="city" class="form-select" name="city">
+                            <option value="">Выбрать город</option>
+                            {% for city in cities %}
+                                <option value="{{ city.id }}">{{ city.name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="category" class="form-label">2. Категория:</label>
+                        <select id="category" class="form-select" name="category" onchange="updateServices()">
+                            <option value="">Выбрать категорию </option>
+                            {% for category in categories %}
+                                <option value="{{ category.id }}">{{ category.name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="service" class="form-label">3. Услуга:</label>
+                        <select id="service" class="form-select" name="service">
+                            <option value="">Выбрать услугу</option>
+                            {% for service in services %}
+                                <option value="{{ service.id }}">{{ service.name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="phone" class="form-label">Телефон (только Израиль!):</label>
+                        <input type="text" class="form-control" id="phone" name="phone" placeholder="В формате 05X-XXXXXXX" maxlength="11" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="whatsapp" class="form-label">WhatsApp (в формате 972ХХХХХХХ):</label>
+                        <input type="text" class="form-control" id="whatsapp" name="whatsapp" placeholder="Можно номер другой страны" maxlength="12">
+                    </div>
+                    <div class="mb-3">
+                        <label for="instagram" class="form-label">Instagram (продвигаем в нашей группе):</label>
+                        <input type="text" class="form-control" id="instagram" name="instagram" placeholder="Просто id, не ссылку">
+                    </div>
+                    <div class="mb-3">
+                        <label for="service_name" class="form-label">Название вашей услуги:</label>
+                        <input type="text" class="form-control" id="service_name" name="service_name" placeholder="Кратко, детали в описании" maxlength="25" required>
+                    </div>
+                   <div class="mb-3">
+                        <label for="pricemin" class="form-label">Стоимость ваших услуг в &#8362;:</label>
+                        <div class="d-flex">
+                            <div class="me-2">
+                                <input type="text" class="form-control" id="pricemin" name="pricemin" placeholder="от" maxlength="4" required>
+                            </div>
+                            <div>
+                                <input type="text" class="form-control" id="pricemax" name="pricemax" placeholder="до" maxlength="5">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="address" class="form-label">Адрес:</label>
+                        <input type="text" class="form-control" id="address" name="address" placeholder="Адрес где оказывается услуга" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="languages" class="form-label">Языки помимо русского:</label>
+                        <input type="text" class="form-control" id="languages" name="languages" placeholder="Может иврит или английский">
+                    </div>
+
+                    <style>
+                        #about {
+                            width: 100%; 
+                            height: 200px; 
+                        }
+                    </style>
+                    <div class="mb-3">
+                        <label for="about" class="form-label">Описание:</label>
+                        <textarea class="form-control" id="about" name="about" placeholder="Введите описание вашей услуги в это поле. Чем подробнее, тем лучше... Анкеты без описания услуг не вызывают у посетителей доверие и выглядят незавершенными) Надеемся, что все поля выше вы заполнили полностью ;)" required></textarea>
+                    </div> 
+                    <div class="mb-3">
+                        <label for="photo" class="form-label">Ваше фото (портрет):</label>
+                        <input type="file" class="form-control" id="photo" name="photo" onchange="previewImage(event, 'imagePreview1')" required>
+                        <img class="rounded-3" id="imagePreview1" src="#" alt="Превью фото" style="max-width: 200px; max-height: 200px; display: none;">
+                        <button type="button" class="btn btn-secondary mt-1 btn-sm" onclick="clearPhotoPreview('imagePreview1')">Удалить выбор</button>
+                    </div>
+                    <div class="mb-3">
+                        <label for="gallery" class="form-label">Фото ваших работ:</label>
+                        <input type="file" class="form-control" id="gallery" name="gallery" onchange="previewImages(event, 'imagePreview2')" multiple>
+                        <div class="rounded-3 mb-1" id="imagePreview2"></div>
+                        <button type="button" class="btn btn-secondary mt-1 btn-sm" onclick="clearImagePreview('imagePreview2')">Удалить выбор</button>
+                    </div>
+                    
+                    <div class="mb-3 form-check">
+                        <input type="checkbox" class="form-check-input" id="okCheckbox"  required>
+                        <label class="form-check-label" for="okCheckbox">Я подтверждаю, что я молодец и ответственно подошел к заполнению своей анкеты и заполнил все поля!</label>
+                    </div>
+                    
+                    <div class="d-flex justify-content-center">
+                        <button type="submit" class="btn btn-primary">Разместить вашу анкету</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+    
+    <script src="{% static '/js/services.js' %}"></script>
+    
+    <script>
+      function previewImage(event, imagePreviewId) {
+          var input = event.target;
+          if (input.files && input.files[0]) {
+              var reader = new FileReader();
+              reader.onload = function (e) {
+                  var imagePreview = document.getElementById(imagePreviewId);
+                  imagePreview.src = e.target.result;
+                  imagePreview.style.display = 'block';
+              }
+              reader.readAsDataURL(input.files[0]);
+          }
+      }
+  </script>
+  
+  <script>
+      function previewImages(event, imagePreviewId) {
+          var input = event.target;
+          var imagePreview = document.getElementById(imagePreviewId);
+          imagePreview.innerHTML = ''; // Очищаем содержимое превью перед добавлением новых изображений
+        
+          for (var file of input.files) {
+              var reader = new FileReader();
+
+              reader.onload = function(e){
+                  var img = document.createElement('img');
+                  img.src = e.target.result;
+                  img.style.maxWidth = '200px';
+                  img.style.maxHeight = '200px';
+                  img.style.marginRight = '5px';
+                  imagePreview.appendChild(img);
+              };
+              reader.readAsDataURL(file);
+          }
+      }
+      
+      function clearPhotoPreview(imagePreviewId) {
+    var imagePreview = document.getElementById(imagePreviewId);
+    imagePreview.style.display = 'none'; // Скрываем превью фото
+    var input = document.getElementById('photo');
+    input.value = ''; // Сбрасываем выбранный файл
+}
+
+function clearImagePreview(imagePreviewId) {
+    var imagePreview = document.getElementById(imagePreviewId);
+    imagePreview.innerHTML = ''; // Очищаем содержимое превью
+    var input = document.getElementById('gallery');
+    input.value = ''; // Сбрасываем выбранные файлы
+}
+  </script>
+    <script>
+        function updateCategoriesAndServices() {
+    var cityId = document.getElementById('city').value;
+    var url = '/get_categories_and_services/?city_id=' + cityId;
+
+    fetch(url)
+        .then(response => response.json())
+        .then(data => {
+            var categorySelect = document.getElementById('category');
+            // Очистить список категорий
+            categorySelect.innerHTML = '<option value="">Выбрать категорию</option>';
+            var serviceSelect = document.getElementById('service');
+            // Очистить список услуг
+            serviceSelect.innerHTML = '<option value="">Выбрать услугу</option>';
+
+            // Добавить категории из полученных данных
+            data.categories.forEach(category => {
+                var option = document.createElement('option');
+                option.value = category.id;
+                option.text = category.name;
+                categorySelect.appendChild(option);
+            });
+        });
+}
+
+// Сброс выбранной категории и обновление списка услуг по умолчанию
+document.getElementById('category').addEventListener('change', function() {
+    var serviceSelect = document.getElementById('service');
+    serviceSelect.innerHTML = '<option value="">Выбрать услугу</option>'; // Добавляем фразу "Выбрать услугу" после сброса выбранной услуги
+});
+    </script>
+
+{% endblock %}

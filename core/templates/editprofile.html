@@ -1,0 +1,100 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+</br>
+    <title>Редактирование анкеты {{ master.name }}</title>
+    <div class="container pt-5 mt-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-6">
+                <h3 class="text-center">Редактирование анкеты {{ master.name }}</h3>
+                <form method="post" enctype="multipart/form-data" id="edit-form">
+                    {% csrf_token %}                  
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Имя:</label>
+                        <input type="text" class="form-control" id="name" name="name" placeholder="Введите ваше Имя и желательно Фамилию">
+                    </div>
+                    
+                   <div class="mb-3">
+                        <label for="phone" class="form-label">Телефон:</label>
+                        <input type="text" class="form-control" id="phone" name="phone" placeholder="В формате 05X-XXXXXXX">
+                    </div>
+                    <div class="mb-3">
+                        <label for="whatsapp" class="form-label">WhatsApp:</label>
+                        <input type="text" class="form-control" id="whatsapp" name="whatsapp" placeholder="В формате 9725XXXXXXXX">
+                    </div>
+                    <div class="mb-3">
+                        <label for="instagram" class="form-label">Instagram:</label>
+                        <input type="text" class="form-control" id="instagram" name="instagram" placeholder="Просто id, не ссылку">
+                    </div>
+                    <div class="mb-3">
+                        <label for="service_name" class="form-label">Название вашей услуги:</label>
+                        <input type="text" class="form-control" id="service_name" name="service_name" placeholder="Полное название вашей услуги">
+                    </div>
+                    <div class="mb-3">
+                        <label for="pricemin" class="form-label">Цена от:</label>
+                        <input type="text" class="form-control" id="pricemin" name="pricemin" placeholder="Клиенты обращают на это внимание">
+                    </div>
+                    <div class="mb-3">
+                        <label for="pricemax" class="form-label">Цена до:</label>
+                        <input type="text" class="form-control" id="pricemax" name="pricemax" placeholder="И на это тоже :)">
+                    </div>
+                    <div class="mb-3">
+                        <label for="address" class="form-label">Адрес:</label>
+                        <input type="text" class="form-control" id="address" name="address" placeholder="Адрес где оказывается услуга">
+                    </div>
+                    <div class="mb-3">
+                        <label for="languages" class="form-label">Языки помимо ru: OLD</label>
+                        <input type="text" class="form-control" id="languages" name="languages" placeholder="Может иврит или английский">
+                    </div>
+                    <label for="languages" class="form-label">Языки помимо ru: NEW</label>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="russian" id="russianCheckbox" checked disabled>
+                        <label class="form-check-label" for="russianCheckbox">
+                          Русский
+                        </label>
+                      </div>
+                      <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="hebrew" id="hebrewCheckbox">
+                        <label class="form-check-label" for="hebrewCheckbox">
+                          Иврит
+                        </label>
+                      </div>
+                      <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="english" id="englishCheckbox">
+                        <label class="form-check-label" for="englishCheckbox">
+                          Английский
+                        </label>
+                      </div>
+
+                    <style>
+                        #about {
+                            width: 100%; 
+                            height: 200px; 
+                        }
+                    </style>
+                    <div class="mb-3">
+                        <label for="about" class="form-label">Описание:</label>
+                        <textarea class="form-control" id="about" name="about" placeholder="Введите описание вашей услуги в это поле. Чем подробнее, тем лучше... Анкеты без описания услуг не вызывают у посетителей доверие и выглядят незавершенными) Надеемся, что все поля выше вы заполнили полностью ;)"></textarea>
+                    </div> 
+                    <div class="mb-3">
+                        <label for="photo" class="form-label">Ваше фото:</label>
+                        <input type="file" class="form-control" id="photo" name="photo" onchange="previewImage(event, 'imagePreview1')">
+                        <img class="rounded-3" id="imagePreview1" src="#" alt="Превью фото" style="max-width: 200px; max-height: 200px; display: none;">
+                        <button type="button" class="btn btn-secondary mt-1 btn-sm" onclick="clearPhotoPreview('imagePreview1')">Удалить выбор</button>
+                    </div>
+                    <div class="mb-3">
+                        <label for="gallery" class="form-label">Фото ваших работ:</label>
+                        <input type="file" class="form-control" id="gallery" name="gallery" onchange="previewImages(event, 'imagePreview2')" multiple>
+                        <div class="rounded-3 mb-1" id="imagePreview2"></div>
+                        <button type="button" class="btn btn-secondary mt-1 btn-sm" onclick="clearImagePreview('imagePreview2')">Удалить выбор</button>
+                    </div>  
+                    <div class="d-flex justify-content-center">
+                        <button type="submit" class="btn btn-primary">Сохранить изменения в анкете</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}

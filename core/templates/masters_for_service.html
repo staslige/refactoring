@@ -1,0 +1,32 @@
+<!-- masters_of_service.html -->
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+<title>{{ service.name }} {{ city.name }} список мастеров</title>
+<div style="max-width:555px;" class="container justify justify-content-center pt-5 mt-5">
+    <h5 align="center"> {{ city.name }}</h5>
+    <h5 align="center">{{ category.name }}</h5>
+    <h5 align="center">{{ service.name }}</h5>
+    <div class="list-group text-center fw-bolder shadow p-2 mb-1 bg-body rounded border-bottom">
+        {% for master in masters %} 
+        <a class="text-decoration-none text-reset" href="{% url 'profile_url'  master_id=master.id  %}">
+            <div class="container h5 border-bottom mt-1 mb-2">
+                <div class="row align-items-center">
+                    <div class="col">
+                        <div class="d-flex justify-content-center align-items-center">
+                            {{ master.name }}</br>{{ master.service_name }}
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="d-flex justify-content-end">
+                            <img class="img-thumbnail img-fluid" src="{% if master.photo %}{{ master.photo.url }}{% else %}/path/to/placeholder-image.jpg{% endif %}" width="79" alt="{{ service.name }}{{ city.name }}">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </a>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

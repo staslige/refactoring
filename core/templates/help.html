@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+</br>
+<div class="container d-flex justify-content-center align-items-center pt-5 mt-5" style="max-width: 500px;">
+  <div class="text-center fw-bolder shadow p-3 mb-5 bg-body rounded">
+    <h3>Возникли вопросы?</h3>
+    <form method="post" enctype="multipart/form-data" id="login" class="p-4 border">
+      {% csrf_token %}
+            
+        <style>
+            .contact-button {
+              background-color: #25d366;
+              border-color: #25d366;
+          }
+          </style>
+          <div class="col">
+        </br>
+        <p>Вопросы по размещению анкеты?</p>
+        <p>Вопросы по размещению рекламы?</p>
+        <p>Любые другие вопросы?</p>
+    </br></br>
+            <a class="btn contact-button btn-lg rounded-pill w-sm-auto w-100 shadow-lg p-3 mb-2 rounded" href="https://wa.me/972539578359">
+              Задайте нам их в WhatsApp &nbsp;<i class="bi bi-whatsapp"></i>
+            </a>
+          
+        </div>
+    </div>
+</div>
+
+{% endblock %} 

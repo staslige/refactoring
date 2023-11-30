@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+
+ <title>Выбор города</title></br>
+    <div style="max-width:555px;" class="container justify justify-content-center pt-5 mt-5">
+        <h3 align="center">Выбор города</h3>     
+      <div class="list-group text-center fw-bolder shadow p-2 mb-1 bg-body rounded">
+        {% for city in cities %}
+        {% if not city.is_invisible %}
+            <a href="{% url 'category' city.id %}" class="list-group-item list-group-item-action" >{{ city.name }}</a>
+        {% endif %}
+        {% endfor %}
+    </div>
+</div>
+
+
+{% endblock %}

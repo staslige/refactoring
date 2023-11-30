@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+</br>
+<div class="container d-flex justify-content-center align-items-center pt-5 mt-5" style="max-width: 500px;">
+  <div class="text-center fw-bolder shadow p-3 mb-5 bg-body rounded">
+    <h3>Вход для мастеров</h3>
+    <form method="post" enctype="multipart/form-data" id="login" class="p-4 border">
+      {% csrf_token %}
+      <div class="mb-3">
+        <label for="login" class="form-label">Логин (Email)</label>
+        <input type="email" class="form-control" id="login" name="login" placeholder="Введите ваш email">
+      </div>
+      <div class="mb-3">
+        <label for="password" class="form-label">Пароль</label>
+        <input type="password" class="form-control" id="password" name="password" placeholder="Введите пароль">
+      </div>
+      <button type="submit" class="btn btn-primary">Войти</button>
+    </form>
+  </div>
+</div>
+{% endblock %} 

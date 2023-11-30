@@ -1,0 +1,32 @@
+<!-- online.html -->
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+<title>ONLINE Услуги</title>
+</br>
+<div style="max-width:555px;" class="container justify justify-content-center pt-5 mt-5">
+    <h3 align="center">ONLINE Услуги</h3>
+    </br>
+    <div class="list-group text-center fw-bolder shadow p-2 mb-1 bg-body rounded border-bottom">
+        {% for master in masters_from_city_44 %} 
+        <div class="container h5 border-bottom mt-1 mb-2">
+            <div class="row align-items-center">
+                <div class="col">
+                    <div class="d-flex justify-content-center align-items-center">
+                        <a class="text-decoration-none text-reset" href="{% url 'profile_url'  master_id=master.id  %}">
+                            {{ master.name }}</br>{{ master.service_name }}
+                        </a> 
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="d-flex justify-content-end">
+                        <img class="img-thumbnail img-fluid" src="{% if master.photo %}{{ master.photo.url }}{% else %}/path/to/placeholder-image.jpg{% endif %}" width="79" alt="{{ service.name }}{{ city.name }}">
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
