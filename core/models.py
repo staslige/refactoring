@@ -63,7 +63,8 @@ class Master(models.Model):
     about = models.TextField(blank=False)
     photo = models.ImageField(upload_to='media/masters', verbose_name='Фото', blank=False) 
     gallery = models.ImageField(upload_to='media/gallery', verbose_name='Фото ваших работ', null=True, blank=True) # Поле изменить на multi pics
-    
+    is_moderated = models.BooleanField(default=False)  # Define the is_moderated attribute
+
     def __str__(self):
         return self.name
     

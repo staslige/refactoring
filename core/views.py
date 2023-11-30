@@ -30,11 +30,13 @@ def register_master(request):
     if request.method == 'POST':
         form = MasterRegistrationForm(request.POST, request.FILES)
         if form.is_valid():
-            master = form.save() 
-            if gallery: # проверяем файлы
+            master = form.save(commit=False)  # Создаем экземпляр мастера, но не сохраняем его в базу данных
+            master.is_moderated = False  # Устанавливаем флаг модерации в значение False
+            master.save()  # Сохраняем экземпляр мастера в базе данных
+            if gallery:  # Проверяем файлы
                 for i in gallery:
-                    GalleryPicture.objects.create(master=master,image=i)
-            return redirect('profile_url', master_id=master.id) 
+                    GalleryPicture.objects.create(master=master, image=i)
+            return redirect('profile_url', master_id=master.id)
     else:
         form = MasterRegistrationForm()
 
@@ -67,6 +69,13 @@ def get_categories_and_services(request):
     }
 
     return JsonResponse(data)
+
+def profile_view(request, master_id):
+    master = Master.objects.get(pk=master_id)
+    if master.is_moderated:  # Проверяем, модерирован ли профиль
+        return render(request, 'profile.html', {'master': master})  # Передаем профиль для отображения
+    else:
+        return HttpResponse('Профиль находится на модерации')  # Иначе выводим сообщение об отсутствии доступа
 
 def master_profile(request, master_id):
     if Master.objects.filter(pk=master_id).exists():

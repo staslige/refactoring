@@ -62,9 +62,14 @@ class ReviewInline(admin.TabularInline):
 
 class MasterAdmin(ImportExportActionModelAdmin, admin.ModelAdmin):
     inlines = [GalleryPictureAdmin, ReviewInline] 
-    list_display = ('id', 'name', 'city', 'category', 'service', 'email')  
+    list_display = ('id', 'name', 'city', 'category', 'service', 'get_moderation_status')  
+    # list_filter = ('moderated')
     form = MasterAdminForm
     search_fields = ['id']
+
+    def get_moderation_status(self, obj):
+        return obj.is_moderated  # Используем существующее поле 'is_moderated' вместо дополнительного метода
+    get_moderation_status.short_description = 'Модерация'  # Устанавливаем краткое описание для столбца
 
 admin.site.register(Master, MasterAdmin)
 admin.site.register(Review)    

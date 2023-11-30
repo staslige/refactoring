@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block content %}
-
+{% if master.is_moderated %}
   <section style="max-width:555px;" class="container pt-5 mt-5">
     <div class="card mb-4 shadow-lg">
       <div class="card-body">
@@ -117,4 +117,7 @@
      </div>
     </div>
   </section>
+  {% else %}
+</br></br></br></br><p>Профиль находится на модерации. Пожалуйста, зайдите позже.</p>
+{% endif %}
 {% endblock %}
