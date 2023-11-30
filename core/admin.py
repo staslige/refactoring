@@ -68,6 +68,7 @@ class MasterAdmin(ImportExportActionModelAdmin, admin.ModelAdmin):
     search_fields = ['id']
 
     def get_moderation_status(self, obj):
+        return 'Да' if obj.is_moderated else 'Нет'
         return obj.is_moderated  # Используем существующее поле 'is_moderated' вместо дополнительного метода
     get_moderation_status.short_description = 'Модерация'  # Устанавливаем краткое описание для столбца
 
