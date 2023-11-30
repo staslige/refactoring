@@ -16,8 +16,25 @@
                     </div>
                     <div class="mb-3">
                         <label for="password" class="form-label">Password:</label>
-                        <input type="password" class="form-control" id="password" name="password" placeholder="Придумайте пароль, который запомните" autocomplete="off" required>
+                        <div class="input-group" id="show_hide_password">
+                            <input type="password" class="form-control" id="password" name="password" placeholder="Придумайте пароль, который запомните" autocomplete="off" required>
+                            <div class="mb-3" style="margin-top: 10px; margin-left: 10px;">
+                                <input type="checkbox" onclick="showHidePassword()"> <i class="bi bi-eye"></i>
+                            </div>
+                        </div>
                     </div>
+
+<script>
+    function showHidePassword() {
+    var passwordField = document.getElementById("password");
+    if (passwordField.type === "password") {
+        passwordField.type = "text";
+    } else {
+        passwordField.type = "password";
+    }
+}
+</script>
+
                     <div class="mb-3">
                         <label for="name" class="form-label">Имя (или название салона, фирмы):</label>
                         <input type="text" class="form-control" id="name" name="name" placeholder="Введите ваше Имя и желательно Фамилию" maxlength="20" required>
@@ -63,7 +80,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="service_name" class="form-label">Название вашей услуги:</label>
-                        <input type="text" class="form-control" id="service_name" name="service_name" placeholder="Кратко, детали в описании" maxlength="25" required>
+                        <input type="text" class="form-control" id="service_name" name="service_name" placeholder="Кратко, детали в описании" maxlength="30" required>
                     </div>
                    <div class="mb-3">
                         <label for="pricemin" class="form-label">Стоимость ваших услуг в &#8362;:</label>
