@@ -36,7 +36,7 @@ def register_master(request):
             if gallery:  # Проверяем файлы
                 for i in gallery:
                     GalleryPicture.objects.create(master=master, image=i)
-            return redirect('registered', master_id=master.id)
+            return redirect('registered') # return redirect('profile_url', master_id=master.id) если редирект на профиль сразу
     else:
         form = MasterRegistrationForm()
 

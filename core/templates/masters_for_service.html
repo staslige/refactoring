@@ -10,6 +10,7 @@
     <h5 align="center">{{ service.name }}</h5>
     <div class="list-group text-center fw-bolder shadow p-2 mb-1 bg-body rounded border-bottom">
         {% for master in masters %} 
+        {% if master.is_moderated %}
         <a class="text-decoration-none text-reset" href="{% url 'profile_url'  master_id=master.id  %}">
             <div class="container h5 border-bottom mt-1 mb-2">
                 <div class="row align-items-center">
@@ -26,7 +27,9 @@
                 </div>
             </div>
         </a>
+        {% endif %}
         {% endfor %}
+
     </div>
 </div>
 {% endblock %}
