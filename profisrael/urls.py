@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.urls import path
 from core import views
 from core import views as cat_views  # Псевдоним для избежания конфликта имен
-from core.views import all, register_master, get_categories_and_services, masters_for_service, master_profile, editprofile, master_login, online, contact, error, help
+from core.views import all, register_master, get_categories_and_services, masters_for_service, master_profile, editprofile, master_login, online, contact, error, help, registered
 from django.conf import settings
 from django.conf.urls.static import static
 
@@ -23,6 +23,7 @@ urlpatterns = [
     path('editprofile/', editprofile, name='editprofile'),
     path('error/', error, name='error'),
     path('help/', help, name='help'),
+    path('registered/', registered, name='registered'),
 
 ]
 

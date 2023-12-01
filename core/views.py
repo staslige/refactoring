@@ -36,7 +36,7 @@ def register_master(request):
             if gallery:  # Проверяем файлы
                 for i in gallery:
                     GalleryPicture.objects.create(master=master, image=i)
-            return redirect('profile_url', master_id=master.id)
+            return redirect('registered', master_id=master.id)
     else:
         form = MasterRegistrationForm()
 
@@ -52,6 +52,9 @@ def register_master(request):
         }
 
     return render(request, 'registration.html', data)
+
+def registered(request):
+    return render(request, 'registered.html')
 
 def get_categories_and_services(request):
     city_id = request.GET.get('city_id')
