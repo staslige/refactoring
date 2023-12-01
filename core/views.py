@@ -4,7 +4,7 @@ from .models import City, Category, Service, Master, GalleryPicture, Review
 from core.forms import MasterRegistrationForm, ReviewForm
 from django.db.models import Count
 from django.contrib.auth.forms import AuthenticationForm
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 
 
 def index(request):
