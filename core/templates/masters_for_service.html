@@ -9,7 +9,7 @@
     <h5 align="center">{{ category.name }}</h5>
     <h5 align="center">{{ service.name }}</h5>
     <div class="list-group text-center fw-bolder shadow p-2 mb-1 bg-body rounded border-bottom">
-        {% for master in masters %} 
+        {% for master in masters reversed %} 
         {% if master.is_moderated %}
         <a class="text-decoration-none text-reset" href="{% url 'profile_url'  master_id=master.id  %}">
             <div class="container h5 border-bottom mt-1 mb-2">
