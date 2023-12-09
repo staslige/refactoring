@@ -1,14 +1,13 @@
 from django.db import models
 from django.views import View
 from django.http import JsonResponse
-# from core.models import City, Category, Service
 from django.core.validators import MaxValueValidator, MinValueValidator
 
 class City(models.Model):
     name = models.CharField(max_length=100, unique=True)
 
     def is_invisible(self):
-        invisible_cities = [44]  # Здесь указываем id города, который нужно скрыть из списка
+        invisible_cities = [44]  # id города, который нужно скрыть из списка
         return self.id in invisible_cities
 
     def __str__(self):

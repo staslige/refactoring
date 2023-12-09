@@ -3,8 +3,6 @@ from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from .models import City, Category, Service, Master, GalleryPicture, Review
 from core.forms import MasterRegistrationForm, ReviewForm
 from django.db.models import Count
-from django.contrib.auth.forms import AuthenticationForm
-from django.contrib.auth import authenticate, login, logout
 
 
 def index(request):
@@ -144,17 +142,3 @@ def error(request):
 
 def help(request):
     return render(request, 'help.html')
-
-def master_login(request):
-    if request.method == 'POST':
-        form = AuthenticationForm(data=request.POST)
-        if form.is_valid():
-            username = form.cleaned_data.get('username')
-            password = form.cleaned_data.get('password')
-            user = authenticate(username=username, password=password)
-            if user is not None:
-                login(request, user)
-                return HttpResponseRedirect('profile')  # Redirect на профиль
-    else:
-        form = AuthenticationForm()
-    return render(request, 'login.html', {'form': form})
